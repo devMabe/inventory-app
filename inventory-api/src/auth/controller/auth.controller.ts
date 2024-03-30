@@ -10,4 +10,8 @@ export class AuthController {
   async login(@Body() params: AuthDto) {
     return await this.authService.login(params);
   }
+  @Post('/refresh-token')
+  async refreshToken(@Body() data: { token: string }) {
+    return await this.authService.refreshToken(data.token);
+  }
 }

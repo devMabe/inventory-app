@@ -10,4 +10,5 @@ export interface IUser {
   createdAt?: Date;
   updatedAt?: Date;
   retry?: number;
+  refreshToken?: string;
 }

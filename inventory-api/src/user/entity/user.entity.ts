@@ -30,6 +30,9 @@ export class User implements IUser {
   @Column({ default: 0 })
   retry?: number;
 
+  @Column({ nullable: true })
+  refreshToken?: string;
+
   @Column()
   createdAt: Date;
 

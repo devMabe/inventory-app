@@ -7,7 +7,8 @@ import { UserService } from 'src/user/service/user.service';
 import { Token } from '../model/auth.model';
 import { AuthDto } from '../dto/auth.dto';
 import { verified } from 'src/user/util/bcryptjs';
-import { generateToken } from '../util/jwt';
+import { generateToken, verifyToken } from '../util/jwt';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -50,6 +51,39 @@ export class AuthService {
       user.retry += 1;
       await this.userService.update(user.id, user);
       throw new UnauthorizedException('The email or password is incorrect');
+    }
+  }
+
+  async refreshToken(token: string): Promise<{ refreshToken: string }> {
+    try {
+      const valid = await verifyToken(token);
+      if (valid) {
+        const user = await this.userService.getByEmail(valid['email']);
+
+        const newToken = await generateToken({
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          docNumber: user.docNumber,
+          doctType: user.docType,
+          email: user.email,
+          isActive: user.isActive,
+        });
+
+        user.refreshToken = newToken;
+        await this.userService.update(user.id, user);
+
+        return {
+          refreshToken: newToken,
+        };
+      }
+    } catch (error) {
+      if (error instanceof TokenExpiredError) {
+        throw new UnauthorizedException(error.message);
+      }
+      if (error instanceof JsonWebTokenError) {
+        throw new UnauthorizedException(error.message);
+      }
     }
   }
 }

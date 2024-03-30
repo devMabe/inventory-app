@@ -6,6 +6,7 @@ export interface TokenData {
   isActive?: boolean;
   docNumber?: string;
   doctType?: string;
+  refreshToken?: string;
 }
 
 export interface Token {
