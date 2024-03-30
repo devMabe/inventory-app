@@ -7,7 +7,7 @@ import { UserService } from 'src/user/service/user.service';
 import { Token } from '../model/auth.model';
 import { AuthDto } from '../dto/auth.dto';
 import { verified } from 'src/user/util/bcryptjs';
-import { generateToken, verifyToken } from '../util/jwt';
+import { generateRefreshToken, generateToken, verifyToken } from '../util/jwt';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 @Injectable()
@@ -60,7 +60,7 @@ export class AuthService {
       if (valid) {
         const user = await this.userService.getByEmail(valid['email']);
 
-        const newToken = await generateToken({
+        const newToken = await generateRefreshToken({
           email: user.email,
         });
 

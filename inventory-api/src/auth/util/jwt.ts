@@ -9,7 +9,7 @@ const generateToken = async (user: TokenData) => {
 };
 
 const generateRefreshToken = async (user: TokenData) => {
-  const jwt = sign(user, JWT_SECRET_REFRESH, { expiresIn: '1d' });
+  const jwt = sign(user, JWT_SECRET, { expiresIn: '1d' });
   return jwt;
 };
 
