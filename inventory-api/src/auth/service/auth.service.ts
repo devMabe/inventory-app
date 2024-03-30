@@ -61,13 +61,7 @@ export class AuthService {
         const user = await this.userService.getByEmail(valid['email']);
 
         const newToken = await generateToken({
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          docNumber: user.docNumber,
-          doctType: user.docType,
           email: user.email,
-          isActive: user.isActive,
         });
 
         user.refreshToken = newToken;
