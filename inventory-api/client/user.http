@@ -1,0 +1,32 @@
+@uri=http://localhost:3005
+
+GET {{uri}}/user
+Content-Type: application/json
+
+{
+  "active": null
+}
+
+### get one
+GET {{uri}}/user/4
+
+###POST
+POST {{uri}}/user
+Content-Type: application/json
+
+{
+  "firstName": "Mateo",
+  "lastName": "Beltran",
+  "email": "danielbelnuz18@gmail.com",
+  "password": "test.123",
+  "docNumber": "1004272380",
+  "docType": "CC"
+}
+
+### actualizar
+PATCH {{uri}}/user/8
+Content-Type: application/json
+
+{
+  "isActive": true
+}
