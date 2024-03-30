@@ -66,6 +66,16 @@ export class UserService {
     }
   }
 
+  async active(id: number): Promise<User | null> {
+    const found = await this.get(id);
+
+    if (found) {
+      found.isActive = true;
+      found.retry = 0;
+      return await this.update(id, found);
+    }
+  }
+
   async getByEmail(email: string): Promise<User | null> {
     return await this.userRepository.findOneBy({
       email,

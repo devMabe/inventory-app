@@ -24,9 +24,13 @@ Content-Type: application/json
 }
 
 ### actualizar
-PATCH {{uri}}/user/8
+PATCH {{uri}}/user/9
 Content-Type: application/json
 
 {
   "isActive": true
 }
+
+
+###
+PUT {{uri}}/user/active/9

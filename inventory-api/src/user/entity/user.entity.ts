@@ -27,6 +27,9 @@ export class User implements IUser {
   @Column({ default: true })
   isActive: boolean;
 
+  @Column({ default: 0 })
+  retry?: number;
+
   @Column()
   createdAt: Date;
 
