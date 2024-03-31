@@ -1,0 +1,34 @@
+@uri=http://localhost:3005/store
+
+@userId= 8
+
+### obtener las tiendas
+GET {{uri}}/all/{{userId}}
+
+### obtener una tienda por id
+GET {{uri}}/123
+
+
+
+### CREAR un tienda
+POST {{uri}}
+Content-Type: application/json
+
+{
+  "name": "Tienda de prueba para eliminar",
+  "address": "mz g casa 2 apt 204",
+  "email": "lorenzo@test.com",
+  "phoneNumber": "3526548451",
+  "userId": 8
+}
+
+### actualizar
+PUT {{uri}}/1
+Content-Type:  application/json
+
+{
+ "address": "test 1"
+}
+
+### delete 
+DELETE {{uri}}/2

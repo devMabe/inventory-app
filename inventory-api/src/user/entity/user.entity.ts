@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { IUser } from '../model/user.model';
+import { Store } from 'src/store/entity/store.entity';
 
 @Entity()
 export class User implements IUser {
@@ -38,4 +39,7 @@ export class User implements IUser {
 
   @Column()
   updatedAt: Date;
+
+  @OneToMany(() => Store, (store) => store.user)
+  stores: Store[];
 }

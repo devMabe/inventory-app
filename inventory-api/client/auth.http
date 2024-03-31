@@ -14,5 +14,5 @@ POST {{uri}}/refresh-token
 Content-Type: application/json
 
 {
- "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmllbGJlbG51ejE4QGdtYWlsLmNvbSIsImlhdCI6MTcxMTgzMjUyMSwiZXhwIjoxNzExODMyODIxfQ.fPCnP4eBsHmSI-PS9hId_ZaZuJORsaQYIgXibMhMUiM"
+ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmllbGJlbG51ejE4QGdtYWlsLmNvbSIsImlhdCI6MTcxMTgzMjY3MSwiZXhwIjoxNzExODMyOTcxfQ.rS31eWvUCqPZBHwz6cwzjwwCFZPLyND4uBRNDINUb4I"
 }
