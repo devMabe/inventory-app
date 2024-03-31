@@ -1,6 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IStore } from '../model/store.model';
 import { User } from 'src/user/entity/user.entity';
+import { Category } from 'src/category/entity/category.entity';
 
 @Entity()
 export class Store implements IStore {
@@ -24,6 +31,9 @@ export class Store implements IStore {
 
   @Column()
   updatedAt?: Date;
+
+  @OneToMany(() => Category, (category) => category.store)
+  categories?: Category[];
 
   @ManyToOne(() => User, (user) => user.stores)
   user: User;

@@ -1,0 +1,27 @@
+@uri=http://localhost:3005/category
+
+
+GET {{uri}}
+
+### crate
+
+POST {{uri}}
+Content-Type: application/json
+
+{
+  "name": "depravadas",
+  "storeId": 1
+}
+
+### update 
+
+
+PUT {{uri}}/2
+Content-Type: application/json
+
+{
+  "name": "Video juegos"
+}
+
+###
+DELETE {{uri}}/4

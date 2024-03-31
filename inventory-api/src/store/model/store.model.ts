@@ -1,3 +1,4 @@
+import { ICategory } from 'src/category/model/category.model';
 import { IUser } from 'src/user/model/user.model';
 
 export interface IStore {
@@ -8,6 +9,7 @@ export interface IStore {
   phoneNumber: string;
   userId?: number;
   user?: IUser;
+  categories?: ICategory[];
   createdAt?: Date;
   updatedAt?: Date;
 }

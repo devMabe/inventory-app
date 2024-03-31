@@ -8,6 +8,8 @@ import { User } from './user/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { StoreModule } from './store/store.module';
 import { Store } from './store/entity/store.entity';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/entity/category.entity';
 
 @Module({
   imports: [
@@ -19,12 +21,13 @@ import { Store } from './store/entity/store.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Store],
+      entities: [User, Store, Category],
       synchronize: true,
     }),
     UserModule,
     AuthModule,
     StoreModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
