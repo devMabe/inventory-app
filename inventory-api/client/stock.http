@@ -1,0 +1,14 @@
+@uri=http://localhost:3005/stock
+
+GET {{uri}}/5
+
+### obtener por item
+GET {{uri}}/2
+
+### AUMENTAR CANTIDAD
+PUT {{uri}}/2
+Content-Type: application/json
+
+{
+  "quantity": 2
+}

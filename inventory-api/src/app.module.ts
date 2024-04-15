@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -10,6 +10,11 @@ import { StoreModule } from './store/store.module';
 import { Store } from './store/entity/store.entity';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/entity/category.entity';
+import { ItemModule } from './item/item.module';
+import { StockModule } from './stock/stock.module';
+import { Item } from './item/entity/item.entity';
+import { Stock } from './stock/entity/stock.entity';
+import { checkJWT } from './auth/middleware/session';
 
 @Module({
   imports: [
@@ -21,15 +26,23 @@ import { Category } from './category/entity/category.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Store, Category],
+      entities: [User, Store, Category, Item, Stock],
       synchronize: true,
     }),
     UserModule,
     AuthModule,
     StoreModule,
     CategoryModule,
+    StockModule,
+    ItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(checkJWT)
+      .forRoutes('user', 'store', 'category', 'item', 'stock');
+  }
+}

@@ -21,7 +21,7 @@ export class StoreController {
     return new StorePresenter(await this.storeService.create(createDto));
   }
 
-  @Get('/all/:userId')
+  @Get('/:userId')
   async getAll(@Param('userId') userId?: number) {
     const data = await this.storeService.getAll(userId);
     return data.map((result) => new StorePresenter(result));

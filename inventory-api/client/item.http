@@ -1,0 +1,35 @@
+@uri=http://localhost:3005/item
+
+
+POST {{uri}}
+Content-Type:  application/json
+
+{
+  "name": "asdadadad",
+  "price": 2500,
+  "categoryId": 3,
+  "image": "imagen-ref2.png"
+}
+
+### actualizar item
+PUT {{uri}}/1
+Content-Type: application/json
+
+{
+  "image": "image-ref-1.jpg"
+}
+
+###
+GET {{uri}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhbmllbGJlbG51ejE4QGdtYWlsLmNvbSIsImlhdCI6MTcxMzIyMTI0NSwiZXhwIjoxNzEzMjIxNTQ1fQ.9-vAtjdAt4wQJRA7ak65_AbYzLmYl3GXyo63fYGy764
+Content-Type: application/json
+
+
+### OBTENER POR ID
+GET {{uri}}/4
+Content-Type: application/json
+
+
+###
+DELETE {{uri}}/4
+Content-Type: application/json

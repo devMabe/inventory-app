@@ -26,6 +26,7 @@ export class CategoryService implements ICrudGeneric<ICategory> {
       },
       relations: {
         store: true,
+        items: true,
       },
     });
   }
@@ -33,7 +34,7 @@ export class CategoryService implements ICrudGeneric<ICategory> {
   async getById(id: number): Promise<ICategory> {
     const found = await this.categoryRepository.findOne({
       where: { id },
-      relations: { store: true },
+      relations: { store: true, items: true },
     });
     if (!found) throw new NotFoundException('Category not found');
     return found;

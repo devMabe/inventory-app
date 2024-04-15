@@ -10,5 +10,6 @@ export class CategoryPresenter extends Category {
       id: category.store.id,
       name: category.store.name,
     } as any;
+    this.items = category.items;
   }
 }
