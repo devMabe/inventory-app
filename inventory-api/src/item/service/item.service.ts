@@ -7,10 +7,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Item } from '../entity/item.entity';
 import { Repository } from 'typeorm';
 import { IItem } from '../model/item.model';
-import { CreateDto } from '../dto/create.dto';
+import { ItemCreateDto } from '../dto/item-create.dto';
 import { Category } from 'src/category/entity/category.entity';
 import { Stock } from 'src/stock/entity/stock.entity';
-import { UpdateDto } from '../dto/update.dto';
+import { ItemUpdateDto } from '../dto/item-update.dto';
 
 @Injectable()
 export class ItemService {
@@ -37,7 +37,7 @@ export class ItemService {
     });
   }
 
-  async create(args: CreateDto): Promise<IItem> {
+  async create(args: ItemCreateDto): Promise<IItem> {
     const { name, price, categoryId, image } = args;
 
     const category = await this.categoryRepository.findOneBy({
@@ -78,7 +78,7 @@ export class ItemService {
     });
   }
 
-  async update(id: number, args: UpdateDto): Promise<IItem> {
+  async update(id: number, args: ItemUpdateDto): Promise<IItem> {
     const found = await this.get(id);
 
     found.updatedAt = new Date();

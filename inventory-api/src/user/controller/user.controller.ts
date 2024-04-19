@@ -1,10 +1,13 @@
 import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { CreateDto } from '../dto/create.dto';
+import { UserCreateDto } from '../dto/user-create.dto';
 import { UserPresenter } from '../presenter/user.presenter';
-import { UpdateDto } from '../dto/update.dto';
+import { UserUpdateDto } from '../dto/user-update.dto';
 import { FiltersDto } from '../dto/filters.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -21,12 +24,12 @@ export class UserController {
   }
 
   @Post()
-  async create(@Body() crateDto: CreateDto) {
+  async create(@Body() crateDto: UserCreateDto) {
     return new UserPresenter(await this.userService.create(crateDto));
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: number, @Body() updateDto: UpdateDto) {
+  async update(@Param('id') id: number, @Body() updateDto: UserUpdateDto) {
     return new UserPresenter(await this.userService.update(id, updateDto));
   }
 

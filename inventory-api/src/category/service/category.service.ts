@@ -8,7 +8,7 @@ import { Category } from '../entity/category.entity';
 import { Repository } from 'typeorm';
 import { ICrudGeneric } from 'src/interface/crud.generic';
 import { ICategory } from '../model/category.model';
-import { CreateDto } from '../dto/create.dto';
+import { CategoryCreateDto } from '../dto/category-create.dto';
 import { StoreService } from 'src/store/service/store.service';
 
 @Injectable()
@@ -40,7 +40,7 @@ export class CategoryService implements ICrudGeneric<ICategory> {
     return found;
   }
 
-  async create(args?: CreateDto): Promise<ICategory> {
+  async create(args?: CategoryCreateDto): Promise<ICategory> {
     const { storeId, name } = args;
 
     const store = await this.storeService.getById(storeId);

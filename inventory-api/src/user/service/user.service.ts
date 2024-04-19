@@ -6,9 +6,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
-import { CreateDto } from '../dto/create.dto';
+import { UserCreateDto } from '../dto/user-create.dto';
 import { encrypt } from '../util/bcryptjs';
-import { UpdateDto } from '../dto/update.dto';
+import { UserUpdateDto } from '../dto/user-update.dto';
 
 @Injectable()
 export class UserService {
@@ -38,7 +38,7 @@ export class UserService {
     return found;
   }
 
-  async create(createDto: CreateDto): Promise<User> {
+  async create(createDto: UserCreateDto): Promise<User> {
     const user = this.userRepository.create(createDto);
 
     const emailExists = await this.getByEmail(user.email);
@@ -55,7 +55,7 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async update(id: number, updateUser: UpdateDto): Promise<User> {
+  async update(id: number, updateUser: UserUpdateDto): Promise<User> {
     const found = await this.get(id);
     if (found) {
       const userUpdated = this.userRepository.create(updateUser);

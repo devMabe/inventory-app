@@ -8,17 +8,22 @@ import {
   Put,
 } from '@nestjs/common';
 import { CategoryService } from '../service/category.service';
-import { CreateDto } from '../dto/create.dto';
+import { CategoryCreateDto } from '../dto/category-create.dto';
 import { CategoryPresenter } from '../presenter/category.presenter';
-import { UpdateDto } from '../dto/update.dto';
+import { CategoryUpdateDto } from '../dto/category-update.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Category')
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  async create(@Body() createDto: CreateDto) {
-    return new CategoryPresenter(await this.categoryService.create(createDto));
+  async create(@Body() categoryCreateDto: CategoryCreateDto) {
+    return new CategoryPresenter(
+      await this.categoryService.create(categoryCreateDto),
+    );
   }
 
   @Get()
@@ -33,7 +38,7 @@ export class CategoryController {
   }
 
   @Put('/:id')
-  async update(@Param('id') id: number, @Body() update: UpdateDto) {
+  async update(@Param('id') id: number, @Body() update: CategoryUpdateDto) {
     return new CategoryPresenter(
       await this.categoryService.update({
         id,

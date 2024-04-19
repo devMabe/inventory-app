@@ -1,7 +1,10 @@
 import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { StockService } from '../service/stock.service';
-import { UpdateDto } from '../dto/updateDto';
+import { StockUpdateDto } from '../dto/stock-updateDto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Stock')
 @Controller('stock')
 export class StockController {
   constructor(private readonly stockService: StockService) {}
@@ -17,7 +20,7 @@ export class StockController {
   }
 
   @Put('/:id')
-  async update(@Param('id') id: number, @Body() data: UpdateDto) {
+  async update(@Param('id') id: number, @Body() data: StockUpdateDto) {
     return await this.stockService.update({
       id,
       quantity: data.quantity,

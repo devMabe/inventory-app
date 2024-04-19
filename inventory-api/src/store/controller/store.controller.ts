@@ -8,17 +8,20 @@ import {
   Put,
 } from '@nestjs/common';
 import { StoreService } from '../service/store.service';
-import { CreateDto } from '../dto/create.dto';
+import { StoreCreateDto } from '../dto/store-create.dto';
 import { StorePresenter } from '../presenter/store.presenter';
-import { UpdateDto } from '../dto/update.dto';
+import { StoreUpdateDto } from '../dto/store-update.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Store')
 @Controller('store')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Post()
-  async create(@Body() createDto: CreateDto) {
-    return new StorePresenter(await this.storeService.create(createDto));
+  async create(@Body() storeCreateDto: StoreCreateDto) {
+    return new StorePresenter(await this.storeService.create(storeCreateDto));
   }
 
   @Get('/:userId')
@@ -33,7 +36,7 @@ export class StoreController {
   }
 
   @Put('/:id')
-  async update(@Param('id') id: number, @Body() updateDto: UpdateDto) {
+  async update(@Param('id') id: number, @Body() updateDto: StoreUpdateDto) {
     updateDto.id = id;
     return new StorePresenter(await this.storeService.update(updateDto));
   }
