@@ -19,6 +19,7 @@ function configureSwagger(app: INestApplication) {
     .setTitle('inventory-back-API')
     .setDescription('Api para administración de inventarios para tiendas.')
     .setVersion('1.0')
+    .addTag('#mabenuz-dev')
     .addBearerAuth()
     .build();
 
